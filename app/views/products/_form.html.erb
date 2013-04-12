@@ -1,0 +1,46 @@
+<%= form_for(@product) do |f| %>
+  <% if @product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+      <% @product.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br />
+    <%= f.text_field :price %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+<%= form_for(@product) do |f| %>
+<div class="field">
+   <%= f.hidden_field :in_cart, :value => true %>
+  </div>
+<div class="actions">
+    <%= f.submit %>
+  </div>
+
+
+
+
+<!-- <form action="/products/<$= params[:id] %>/add-to-cart" method="post" >
+  <button>Add to Cart</button>
+</form>
+
+<form action="/products/<%= params[:id] %>/delete-from-cart" method="post">
+  <button> =Delete from Cart</button>
+</form>
+ -->

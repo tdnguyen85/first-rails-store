@@ -1,0 +1,15 @@
+<h3>Shopping Cart for [User]</h3>
+<table>
+	<tr>
+		<%= @load_product_in_cart.each do |item| %>
+		<td><%= item.name %></td>
+		<td><%= item.price %></td>
+		<% end %>
+	</tr>
+	<tr>
+
+	<td><h4>Cart Total Price</h4></td>
+	<td><%= number_to_currency(show_total_price) %></td>
+	</tr>
+
+</table>

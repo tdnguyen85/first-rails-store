@@ -13,20 +13,23 @@ class ProductsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @products }
-  
+    end
   end
 
   def add_to_cart
     @product_id = Product.find(params[:id])
-    @in_cart = @load_products.
+    @product.in_cart = true
+    @product.save
+
+    #@product.update_attributes({:in_cart => true})
   end
   # GET /products/1
   # GET /products/1.json
   def show
     @product = Product.find(params[:id])
-    #@products_id = @product.id
+    #@product_id = @product.id
 
-    @reviews = Review.where(:product_id => @product.id)
+    @reviews = Review.where(:product_id => '@product.id')
 
     respond_to do |format|
       format.html # show.html.erb
@@ -94,3 +97,4 @@ class ProductsController < ApplicationController
     end
   end
 end
+

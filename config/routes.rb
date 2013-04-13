@@ -1,8 +1,11 @@
 RailsStore::Application.routes.draw do
-  resources :reviews
-
-  get '/reviews/new(.:format)', :to => 'reviews#new' :as => 'reviews'
+  #resources :reviews, :only [:new, :create]
+  get '/', :to => 'products#index', :as => 'home'
+  get '/reviews/new(.:format)', :to => 'reviews#new', :as => 'reviews'
   post '/reviews(.:format)', :to => 'reviews#create'
+  # get '/reviews/ne(.:format)', :controller => 'reviews', :action => 'new', :as => 'reviews'
+  
+  get '/reviews', :to => 'reviews#index', :as => 'reviews'
 
   resources :products
  

@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-<%= render 'cart %>'
+<%= render 'cart' %>
 <p>
   <b>Name:</b>
   <%= @product.name %>
@@ -14,6 +14,16 @@
 	<b>In Cart</b>
 	<%= @product.in_cart %>
 </p>
+
+
+<%= form_for(@product) do |f| %>
+<div class="field">
+   <%= f.hidden_field :in_cart, :value => true %>
+  </div>
+<div class="actions">
+    <%= f.submit %>
+    <% end %>
+  </div>
 <form action="/reviews/new" method='get'>
 	<input type='hidden' value='<%= @product.id %>' name='product_id'/>
 		<button type='submit'>Write your review for <%= @product.name %></button>
@@ -21,7 +31,19 @@
 
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %> |
-<%= link_to 'Review', new_review_path(@product) %>
-<a href="/reviews/new?id=<%= @product.id %>">Review</a>
+<a href="/reviews/new?product_id=<%= @product.id %>">Review</a>
 
-<%= @review
+<div>
+  <%= render 'reviews/form' %>
+</div>
+ 
+<p>
+  <b>Reviews:</b>
+  <ol>
+    <% @product.reviews.each do |review| %>
+      <li> <%= review.rating %> </br>
+           <%= review.body %> 
+           <% end %>
+      </li>
+  </ol>
+</p>

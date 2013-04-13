@@ -3,5 +3,5 @@ class Product < ActiveRecord::Base
   
   has_many :reviews
   validates_uniqueness_of :name
-  validates_presence_of :price
+  validates_presence_of :price, :name
 end

@@ -1,49 +1,69 @@
+
+
 <p id="notice"><%= notice %></p>
-<%= render 'cart' %>
-<p>
-  <b>Name:</b>
-  <%= @product.name %>
-</p>
+<div row="row-fluid">
+  <div class="span6 offset1" style="block: inline">
+    <img src="<%= @product.url %>" style="width: 300px; float: left" />
+    <div style="float: left">
+      <p>
+        <b>Product:</b>
+        <%= @product.name %>
+      </p>
 
-<p>
-  <b>Price:</b>
-  <%= @product.price %>
-</p>
+      <p>
+        <b>Price:</b>
+        <%= @product.price %>
+      </p>
 
-<p>
-	<b>In Cart</b>
-	<%= @product.in_cart %>
-</p>
+      <p>
+      	<b>In Cart:</b>
+      	<%= 'Yes'if @product.in_cart == true %>
+      </p>
 
+      <p>
+        <b>Description:</b>
+        <%= @product.body_field %>
+      </p>
 
-<%= form_for(@product) do |f| %>
-<div class="field">
-   <%= f.hidden_field :in_cart, :value => true %>
+      <%= form_for(@product) do |f| %>
+      <div>
+         <%= f.hidden_field :in_cart, :value => true %>
+        </div>
+      <div class=" btn btn-success">
+          <%= f.submit %>
+          <% end %>
+        </div>
+      <form action="/reviews/new" method='get'>
+      	<input type='hidden' value='<%= @product.id %>' name='product_id'/>
+      		<button type='submit'>Write your review for <%= @product.name %></button>
+      </form>
+
+      <div>
+      <%= link_to 'Edit', edit_product_path(@product) %> |
+      <%= link_to 'Back', products_path %> |
+      <a href="/reviews/new?product_id=<%= @product.id %>">Review</a>
+      </div>
+    </div>
   </div>
-<div class="actions">
-    <%= f.submit %>
-    <% end %>
+  <div class="span4 offset1" style="float: right; block: inline">
+    <%= render "cart" %>
   </div>
-<form action="/reviews/new" method='get'>
-	<input type='hidden' value='<%= @product.id %>' name='product_id'/>
-		<button type='submit'>Write your review for <%= @product.name %></button>
-</form>
-
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %> |
-<a href="/reviews/new?product_id=<%= @product.id %>">Review</a>
-
-<div>
-  <%= render 'reviews/form' %>
 </div>
- 
-<p>
-  <b>Reviews:</b>
-  <ol>
-    <% @product.reviews.each do |review| %>
-      <li> <%= review.rating %> </br>
-           <%= review.body %> 
-           <% end %>
-      </li>
-  </ol>
-</p>
+<br />
+<div class="row-fluid">
+  <div class="span10 offset2">
+    <p>
+      <br />
+      <br />
+      <br />
+      <b>Reviews:</b>
+      <table>
+        <% @product.reviews.each do |review| %>
+          <tr><td> <%= review.rating %> </td>
+               <td><%= review.body %> </td>
+               <% end %>
+          </tr>
+      </table>
+    </p>
+  </div>
+</div>

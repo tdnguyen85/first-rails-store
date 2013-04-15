@@ -1,16 +1,18 @@
 RailsStore::Application.routes.draw do
-  #resources :reviews, :only [:new, :create]
-  get '/', :to => 'products#index', :as => 'home'
-  get '/reviews/new(.:format)', :to => 'reviews#new', :as => 'reviews'
-  post '/reviews(.:format)', :to => 'reviews#create'
-  # get '/reviews/ne(.:format)', :controller => 'reviews', :action => 'new', :as => 'reviews'
-  
-  get '/reviews', :to => 'reviews#index', :as => 'reviews'
+  resources :reviews, :only => [:new, :create, :edit, :show, :update]
+  # get '/', :to => 'products#index', :as => 'home'
 
+  # get '/reviews', :to => 'reviews#index', :as => 'reviews'
+
+  # get '/reviews/new(.:format)', :to => 'reviews#new', :as => 'reviews'
+  # post '/reviews(.:format)', :to => 'reviews#create'
+  # get '/reviews/new(.:format)', :controller => 'reviews', :action => 'new', :as => 'reviews'
+  
+  
   resources :products
  
-  post '/products/:product_id(.:format)/add-to-cart', :to => 'product#create'
-  post '/products/:product_id(.:format)/delete-from-cart', :to => 'product#create'
+  # post '/products/:product_id(.:format)/addcart', :to => 'product#add_to_cart'
+  # post '/products/:product_id(.:format)/deletecart', :to => 'product#remove_from_cart'
 
   #get '/', :to => 'home#index', :as => 'tan' 
 
@@ -63,7 +65,7 @@ RailsStore::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'welcome#index'
+  root :to => 'products#index'
 
   # See how all your routes lay out with "rake routes"
 

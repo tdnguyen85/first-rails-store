@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+
   # GET /products
   # GET /products.json
   before_filter :load_products
@@ -73,6 +74,9 @@ class ProductsController < ApplicationController
   # PUT /products/1.json
   def update
     @product = Product.find(params[:id])
+    @product.in_cart = false
+    @product.save
+
 
     respond_to do |format|
       if @product.update_attributes(params[:product])
